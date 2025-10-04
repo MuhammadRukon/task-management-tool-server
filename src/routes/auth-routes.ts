@@ -20,8 +20,8 @@ authRoutes.post("/register", async (req: Request, res: Response) => {
     if (existingUser) {
       return res.status(400).json({ message: "User already exists" });
     }
-
     // TODO: hash password
+
     const user = new User({ name, email, password });
     await user.save();
 
