@@ -10,7 +10,12 @@ import { userRoutes } from "./routes/user-routes";
 const app = express();
 const PORT = 3000;
 
-app.use(cors({ origin: "*", credentials: true }));
+app.use(
+  cors({
+    origin: [process.env.LOCAL_CLIENT!, process.env.REMOTE_CLIENT!],
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 
