@@ -5,7 +5,7 @@ import cors from "cors";
 import { taskRoutes } from "./routes/task-routes";
 import { authRoutes } from "./routes/auth-routes";
 import "dotenv/config";
-import { userRoutes } from "./routes/user";
+import { userRoutes } from "./routes/user-routes";
 
 const app = express();
 const PORT = 3000;

@@ -5,7 +5,7 @@ import { authenticateToken } from "../middleware/auth";
 export const taskRoutes = Router();
 
 // Get all tasks
-taskRoutes.get("/", authenticateToken, async (req: Request, res: Response) => {
+taskRoutes.get("/", async (req: Request, res: Response) => {
   const tasks = await Task.find();
 
   res.json(tasks || []);
