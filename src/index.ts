@@ -27,12 +27,16 @@ app.use("/users", userRoutes);
 app.use("/auth", authRoutes);
 app.use("/tasks", taskRoutes);
 
+let isConnected = false;
+
 const connectDB = async () => {
+  if (isConnected) return;
   try {
     await mongoose.connect(
       `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.wgk6h9w.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`,
       { dbName: "task-management-tool" }
     );
+    isConnected = true;
     console.log("MongoDB connected");
   } catch (err) {
     console.error("MongoDB connection error:", err);
@@ -41,4 +45,9 @@ const connectDB = async () => {
 
 connectDB();
 
-app.listen(PORT, () => console.log(`Server running on ${PORT}`));
+if (process.env.NODE_ENV !== "production") {
+  app.listen(PORT, () => console.log(`Server running on ${PORT}`));
+}
+
+// Export for Vercel serverless
+export default app;
